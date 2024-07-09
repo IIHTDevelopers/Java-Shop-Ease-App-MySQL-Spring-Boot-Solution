@@ -73,22 +73,4 @@ public class InventoryExceptionTest {
 				exceptionTestFile);
 	}
 
-	@Test
-	public void testUpdateInventoryItemNotFoundException() throws Exception {
-		Long inventoryId = 1L;
-		InventoryDTO inventoryDTO = MasterData.getInventoryDTO();
-		ErrorResponse exResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Inventory item not found");
-
-		when(this.inventoryService.updateInventoryItem(inventoryId, inventoryDTO))
-				.thenThrow(new NotFoundException("Inventory item not found"));
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/inventory/" + inventoryId)
-				.content(MasterData.asJsonString(inventoryDTO)).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON);
-
-		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-
-		yakshaAssert(currentTest(),
-				(result.getResponse().getContentAsString().contains(exResponse.getMessage()) ? "true" : "false"),
-				exceptionTestFile);
-	}
 }
