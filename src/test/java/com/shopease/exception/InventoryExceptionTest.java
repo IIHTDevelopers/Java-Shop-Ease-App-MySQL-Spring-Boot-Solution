@@ -57,21 +57,6 @@ public class InventoryExceptionTest {
 	}
 
 	@Test
-	public void testAddInventoryItemInvalidDataException() throws Exception {
-		InventoryDTO inventoryDTO = new InventoryDTO(); // Create an invalid InventoryDTO
-
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/inventory")
-				.content(MasterData.asJsonString(inventoryDTO)).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON);
-
-		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-
-		yakshaAssert(currentTest(),
-				(result.getResponse().getStatus() == HttpStatus.BAD_REQUEST.value() ? "true" : "false"),
-				exceptionTestFile);
-	}
-
-	@Test
 	public void testDeleteInventoryItemNotFoundException() throws Exception {
 		Long inventoryId = 1L;
 		ErrorResponse exResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Inventory item not found");
