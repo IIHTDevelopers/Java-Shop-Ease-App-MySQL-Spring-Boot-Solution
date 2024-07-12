@@ -39,11 +39,11 @@ public class OrderServiceImpl implements OrderService {
 		order.setStatus(orderDTO.getStatus());
 
 		User user = userRepository.findById(orderDTO.getUser().getId()).orElseThrow(
-				() -> new NotFoundException("User not found for this id :: " + orderDTO.getUser().getId()));
+				() -> new NotFoundException("User not found for this id : " + orderDTO.getUser().getId()));
 		order.setUser(user);
 
 		Product product = productRepository.findById(orderDTO.getProduct().getId()).orElseThrow(
-				() -> new NotFoundException("Product not found for this id :: " + orderDTO.getProduct().getId()));
+				() -> new NotFoundException("Product not found for this id : " + orderDTO.getProduct().getId()));
 		order.setProduct(product);
 
 		Order savedOrder = orderRepository.save(order);
@@ -60,24 +60,24 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderDTO getOrderById(Long id) {
 		Order order = orderRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Order not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Order not found for this id : " + id));
 		return convertToDTO(order);
 	}
 
 	@Override
 	public OrderDTO updateOrder(Long id, OrderDTO orderDTO) {
 		Order order = orderRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Order not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Order not found for this id : " + id));
 
 		order.setOrderDate(orderDTO.getOrderDate());
 		order.setStatus(orderDTO.getStatus());
 
 		User user = userRepository.findById(orderDTO.getUser().getId()).orElseThrow(
-				() -> new NotFoundException("User not found for this id :: " + orderDTO.getUser().getId()));
+				() -> new NotFoundException("User not found for this id : " + orderDTO.getUser().getId()));
 		order.setUser(user);
 
 		Product product = productRepository.findById(orderDTO.getProduct().getId()).orElseThrow(
-				() -> new NotFoundException("Product not found for this id :: " + orderDTO.getProduct().getId()));
+				() -> new NotFoundException("Product not found for this id : " + orderDTO.getProduct().getId()));
 		order.setProduct(product);
 
 		Order updatedOrder = orderRepository.save(order);
@@ -87,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Boolean cancelOrder(Long id) {
 		Order order = orderRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Order not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Order not found for this id : " + id));
 
 		orderRepository.delete(order);
 		return true;
@@ -96,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String getOrderStatus(Long id) {
 		Order order = orderRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Order not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Order not found for this id : " + id));
 
 		return order.getStatus();
 	}
@@ -104,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Boolean updateOrderStatus(Long id, String status) {
 		Order order = orderRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Order not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Order not found for this id : " + id));
 
 		order.setStatus(status);
 		orderRepository.save(order);
@@ -114,7 +114,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Boolean initiateReturn(Long id) {
 		Order order = orderRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Order not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Order not found for this id : " + id));
 
 		order.setStatus("RETURN_INITIATED");
 		orderRepository.save(order);
