@@ -51,14 +51,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDTO getProductById(Long id) {
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Product not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Product not found for this id : " + id));
 		return convertToDTO(product);
 	}
 
 	@Override
 	public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Product not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Product not found for this id : " + id));
 
 		product.setName(productDTO.getName());
 		product.setDescription(productDTO.getDescription());
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Boolean deleteProduct(Long id) {
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Product not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Product not found for this id : " + id));
 
 		productRepository.delete(product);
 		return true;
@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ReviewDTO> getProductReviews(Long productId) {
 		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new NotFoundException("Product not found for this id :: " + productId));
+				.orElseThrow(() -> new NotFoundException("Product not found for this id : " + productId));
 
 		return product.getReviews().stream().map(this::convertReviewToDTO).collect(Collectors.toList());
 	}
@@ -88,7 +88,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ReviewDTO addProductReview(Long productId, ReviewDTO reviewDTO) {
 		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new NotFoundException("Product not found for this id :: " + productId));
+				.orElseThrow(() -> new NotFoundException("Product not found for this id : " + productId));
 
 		Review review = new Review();
 		review.setComment(reviewDTO.getComment());
