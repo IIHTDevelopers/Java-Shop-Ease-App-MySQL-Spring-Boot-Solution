@@ -46,14 +46,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO getUserById(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("User not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("User not found for this id : " + id));
 		return convertToDTO(user);
 	}
 
 	@Override
 	public UserDTO updateUser(Long id, UserDTO userDTO) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("User not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("User not found for this id : " + id));
 
 		user.setUsername(userDTO.getUsername());
 		user.setPassword(userDTO.getPassword());
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Boolean deleteUser(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("User not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("User not found for this id : " + id));
 
 		userRepository.delete(user);
 		return true;
