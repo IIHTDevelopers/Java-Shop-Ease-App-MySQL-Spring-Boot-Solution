@@ -46,14 +46,14 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public InventoryDTO getInventoryItemById(Long id) {
 		Inventory inventory = inventoryRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Inventory item not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Inventory item not found for this id : " + id));
 		return convertToDTO(inventory);
 	}
 
 	@Override
 	public InventoryDTO updateInventoryItem(Long id, InventoryDTO inventoryDTO) {
 		Inventory inventory = inventoryRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Inventory item not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Inventory item not found for this id : " + id));
 
 		inventory.setLocation(inventoryDTO.getLocation());
 		inventory.setStockQuantity(inventoryDTO.getStockQuantity());
@@ -65,7 +65,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public Boolean deleteInventoryItem(Long id) {
 		Inventory inventory = inventoryRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Inventory item not found for this id :: " + id));
+				.orElseThrow(() -> new NotFoundException("Inventory item not found for this id : " + id));
 
 		inventoryRepository.delete(inventory);
 		return true;
@@ -79,7 +79,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public InventoryDTO updateProductInventory(Long productId, InventoryDTO inventoryDTO) {
 		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new NotFoundException("Product not found for this id :: " + productId));
+				.orElseThrow(() -> new NotFoundException("Product not found for this id : " + productId));
 
 		Inventory inventory = product.getInventory();
 		inventory.setStockQuantity(inventoryDTO.getStockQuantity());
